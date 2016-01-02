@@ -1,16 +1,17 @@
 # Optimal load
 
-loadFiles <- function(directory, numFiles) {
+loadFiles <- function(directory, numFiles = 0) {
 
-if(!exists(numFiles))
+fileList <- list.files(directory, full.names = TRUE)
+
+if(numFiles == 0)
     numFiles <- length(fileList)
-    
-  fileList <- list.files(directory, full.names = TRUE)
+  
   tmp <- vector(mode = "list", length = length(fileList))
   
   for(x in numFiles) {
     tmp[[x]] <- read.csv(fileList[[x]])
   }
   
-  dataframe <- do.call(rbind, tmp)
+  dataframe <<- do.call(rbind, tmp)
 }
